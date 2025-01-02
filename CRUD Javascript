@@ -1,1 +1,52 @@
+// CRUD Javascript - lógica 
 
+const miniSite = {
+    usuario : [
+        {
+        username: "Rafael",
+        }
+    ],
+    Posts :[
+        {
+            id : 1,
+            criador : "Rafael",
+            content : 'meu primeiro post'
+        }
+    ],
+};
+
+//Create  - para criar outro post
+function  criaPost(dados){
+    miniSite.Posts.push({
+        id : miniSite.Posts.length + 1,
+        criador : dados.criador,
+        content : dados.content
+    })
+}
+criaPost({criador : 'Rafael' , content : "segundo post"});
+console.log(miniSite.Posts)
+
+//Read - ler todos os posts 
+function pegaPost(){
+    return miniSite.Posts;
+}
+console.log(pegaPost())
+//Update - alterar post que já foi criado. 
+function atualizaContentDoPost(id, novoconteudo){
+    const postQueVaiSerAtualizado = pegaPost().find((post)=>{
+        return post.id == id;
+    });
+    console.log(1,"novo conteudo")
+    postQueVaiSerAtualizado.content = novoconteudo
+}
+atualizaContentDoPost(postQueVaiSerAtualizado)
+
+//Delete - deletar post criado 
+function apagaPost(id){
+    const listaDePostAtualizada = pegaPost().filter((postAtual)=>{
+        return postAtual !== id;
+    }) 
+    miniSite.Posts = listaDePostAtualizada;
+}
+apagaPost(2);
+console.log(pegaPost());
